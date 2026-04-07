@@ -1,0 +1,15 @@
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10001,'USD','INR',65,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10002,'EUR','INR',75,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10003,'AUD','INR',50,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10004,'GBP','INR',85,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10005,'USD','EUR',0.85,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10006,'USD','GBP',0.76,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10007,'USD','MXN',17,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10008,'EUR','USD',1.18,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10009,'GBP','USD',1.31,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10010,'USD','JPY',110,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10011,'EUR','GBP',0.88,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10012,'USD','CAD',1.25,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10013,'USD','CHF',0.92,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10014,'MXN','USD',0.059,'');
+insert into currency_exchange (id, currency_from, currency_to, conversion_multiple, environment) values(10015,'JPY','USD',0.0091,'');
