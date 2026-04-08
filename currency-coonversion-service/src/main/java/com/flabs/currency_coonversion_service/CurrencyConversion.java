@@ -2,14 +2,47 @@ package com.flabs.currency_coonversion_service;
 
 import java.math.BigDecimal;
 
+/**
+ * ============================================================
+ * CONCEPTO: DTO compartido entre microservicios
+ * ============================================================
+ *
+ * Esta clase sirve un doble proposito en este servicio:
+ *
+ *   1. DESERIALIZACION de respuesta del currency-exchange-service:
+ *      Cuando Feign (o RestTemplate) recibe el JSON del otro servicio,
+ *      Jackson necesita un objeto donde "encajar" los campos del JSON.
+ *      Los campos de esta clase deben coincidir (en nombre) con los
+ *      campos del JSON que devuelve CurrencyExchange (el otro servicio).
+ *
+ *   2. SERIALIZACION de la respuesta de ESTE servicio:
+ *      El controller devuelve un objeto CurrencyConversion como respuesta
+ *      HTTP, que Spring serializa a JSON para el cliente final.
+ *
+ * CAMPOS ADICIONALES vs CurrencyExchange:
+ *   - quantity:             cantidad a convertir (input del usuario)
+ *   - totalCalculatedAmount: resultado final = quantity * conversionMultiple
+ *
+ * CONCEPTO: Por que duplicar la clase en lugar de compartirla?
+ * ------------------------------------------------------------
+ * En microservicios se debate mucho si compartir DTOs entre servicios.
+ * OPCION A (como aqui): cada servicio tiene su propia copia del DTO.
+ *   Ventaja: servicios completamente independientes, sin dependencias compartidas.
+ *   Desventaja: duplicacion de codigo.
+ * OPCION B: libreria compartida con los DTOs comunes.
+ *   Ventaja: un solo lugar para el modelo.
+ *   Desventaja: acoplamiento entre servicios (si cambias el DTO, debes recompilar todos).
+ *
+ * La OPCION A es mas pura en microservicios; la OPCION B es mas pragmatica.
+ */
 public class CurrencyConversion {
     private Long id;
     private String from;
     private String to;
-    private BigDecimal conversionMultiple;
-    private BigDecimal quantity;
-    private BigDecimal totalCalculatedAmount;
-    private String environment;
+    private BigDecimal conversionMultiple;  // viene del currency-exchange-service
+    private BigDecimal quantity;            // input del usuario en la URL
+    private BigDecimal totalCalculatedAmount; // = quantity * conversionMultiple
+    private String environment;             // puerto de la instancia que respondio
 
     public CurrencyConversion(
             Long id,
@@ -28,6 +61,9 @@ public class CurrencyConversion {
         this.environment = environment;
     }
 
+    // Constructor vacio necesario para que Jackson pueda deserializar
+    // el JSON del currency-exchange-service a este objeto.
+    // Sin este constructor, Feign/RestTemplate lanzaria un error de deserializacion.
     public CurrencyConversion() {
 
     }
